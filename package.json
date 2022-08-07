@@ -1,0 +1,44 @@
+{
+  "name": "event-brite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "env-cmd --file ./test.env jest --watch",
+    "install-client": "cd client && npm install",
+    "install-server": "npm install",
+    "server": "nodemon server --ignore client",
+    "client": "npm start --prefix client",
+    "start": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\""
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.30.0",
+    "concurrently": "^7.3.0",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-async-errors": "^3.1.1",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-session": "^1.17.3",
+    "helmet": "^5.1.0",
+    "http-status-codes": "^2.2.0",
+    "install": "^0.13.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.4.6",
+    "morgan": "^1.10.0",
+    "npm": "^8.16.0",
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
+    "validator": "^13.7.0",
+    "xss-clean": "^0.1.1"
+  }
+}
