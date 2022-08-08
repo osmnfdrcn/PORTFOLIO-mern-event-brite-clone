@@ -324,10 +324,14 @@ ul {
   margin-top: -1rem;
 }
 
-.container {
+.container,
+.dashboard-section {
   width: var(--fluid-width);
   max-width: var(--max-width);
   margin: 60px auto;
+}
+.dashboard-section {
+  background-color: red;
 }
 
 .full-page {

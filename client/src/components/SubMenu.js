@@ -1,5 +1,5 @@
 import Wrapper from "../assets/Wrappers/SubMenu"
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from "../features/user/userSlice";
 import axios from 'axios'
@@ -24,7 +24,7 @@ const SubMenu = ({ setShowSubMenu }) => {
         <li>Manage My Events</li>
         <li>Create An Event</li>
         <li>Following</li>
-        <li>Settings</li>
+        <li>Account Settings</li>
         <li onClick={handleLogout}>Logout</li>
       </ul>
     </Wrapper>
