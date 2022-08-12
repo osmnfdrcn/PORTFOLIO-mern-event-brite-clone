@@ -3,10 +3,9 @@ const Wrapper = styled.div`
   position: absolute;
     background-color: white;
     top: 60px;
-    right: 3%;
-    width: 208px;
-    border: 1px solid var(--grey-50);
-
+    right: 0;
+    width: 250px;
+    box-shadow: var(--shadow-2);
     ul li{
       display: flex;
       align-items: center;

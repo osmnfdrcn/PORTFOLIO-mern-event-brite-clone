@@ -55,7 +55,7 @@ html {
   --textColor: var(--grey-900);
   --borderRadius: 0.25rem;
   --letterSpacing: 1px;
-  --transition: 0.3s ease-in-out all;
+  --transition: 1s ease-in-out all;
   --max-width: 1300px;
   --fixed-width: 500px;
   --fluid-width: 90vw;
@@ -330,8 +330,14 @@ ul {
   max-width: var(--max-width);
   margin: 60px auto;
 }
+
+
 .dashboard-section {
   background-color: red;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .full-page {

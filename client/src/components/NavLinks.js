@@ -1,11 +1,10 @@
 import { NavLink } from 'react-router-dom';
-import links from '../utils//links'
+import { userProfileMenuLinks as links } from '../utils/links'
 
 const NavLinks = ({ toggleMenu, setToggleMenu }) => {
   return (
     <nav className='side-menu'
-      style={toggleMenu ? { "display": "block" } : { "display": "none" }}
-      onMouseLeave={() => setToggleMenu(false)}
+      style={toggleMenu ? { "display": "block" } : null}
     >
       <div className='nav-links'>
         {

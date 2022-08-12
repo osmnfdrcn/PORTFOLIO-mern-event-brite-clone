@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from "../features/user/userSlice";
 import axios from 'axios'
 
-const SubMenu = ({ setShowSubMenu }) => {
+const SubMenu = () => {
   const dispatch = useDispatch();
   const { user, isLoading } = useSelector((store) => store.user);
 
@@ -18,7 +18,7 @@ const SubMenu = ({ setShowSubMenu }) => {
 
   }
   return (
-    <Wrapper onMouseLeave={() => setShowSubMenu(false)}>
+    <Wrapper >
       <ul>
         <Link to='/'><li>Browse Events</li></Link>
         <li>Manage My Events</li>
@@ -32,3 +32,5 @@ const SubMenu = ({ setShowSubMenu }) => {
 }
 
 export default SubMenu
+
+// setShowSubMenu = { setShowSubMenu }

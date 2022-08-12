@@ -1,14 +1,18 @@
 import Wrapper from '../assets/Wrappers/Navbar';
-import { AiOutlinePlus, AiOutlineHeart, AiOutlineUser, AiOutlineSearch } from 'react-icons/ai'
-import { useState } from 'react';
+import MainHeaderItem from './MainHeaderItem';
 import Logo from './Logo';
 import SubMenu from './SubMenu';
+import { AiOutlinePlus, AiOutlineHeart, AiOutlineUser, AiOutlineSearch } from 'react-icons/ai'
+
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setShowMainSubMenu } from '../features/app/appSlice'
+
 
 const Navbar = () => {
-  const [showSubMenu, setShowSubMenu] = useState(false)
+  const dispatch = useDispatch();
   const { user } = useSelector((store) => store.user);
+  const { showMainSubMenu } = useSelector((store) => store.app)
 
   return (
     <Wrapper>
@@ -16,36 +20,21 @@ const Navbar = () => {
 
       {user
         ? <div className='header-items'>
-          <div className="header-item">
-            <AiOutlinePlus />
-            <span>Create an event</span>
-          </div>
-
-          <div className="header-item">
-            <AiOutlineHeart />
-            <span>Likes</span>
-          </div>
-
-          <div className='user-item' onClick={() => setShowSubMenu(!showSubMenu)} >
-            <AiOutlineUser />
-            <span>{user.email}</span>
-          </div>
+          <MainHeaderItem reactIcon={<AiOutlineSearch />} text={"Search events"} classname={"header-item search"} />
+          <MainHeaderItem reactIcon={<AiOutlinePlus />} text={"Create an event"} classname={"header-item"} />
+          <MainHeaderItem reactIcon={<AiOutlineHeart />} text={"Likes"} classname={"header-item"} />
+          <MainHeaderItem reactIcon={<AiOutlineUser />} text={user.firstName} classname={"user-item"} onClick={() => dispatch(setShowMainSubMenu(!showMainSubMenu))} />
         </div>
         : (<div className='header-items'>
-          <div className="header-item">
-            <AiOutlineSearch />
-            <span>Search events</span>
-          </div>
+          <MainHeaderItem reactIcon={<AiOutlineSearch />} text={"Search events"} classname={"header-item search"} />
           <Link to='/login' className='user-item'>
-            <div className='user-item' >
-              <span>Login</span>
-            </div>
+            <MainHeaderItem text={"Login"} classname={"user-item"} />
           </Link>
         </div>)
 
       }
       {
-        user && showSubMenu && <SubMenu setShowSubMenu={setShowSubMenu} />
+        user && showMainSubMenu && <SubMenu />
       }
 
     </Wrapper>

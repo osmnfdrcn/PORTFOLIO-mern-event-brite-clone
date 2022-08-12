@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { verifyUser } from '../features/user/userSlice';
 import Wrapper from '../assets/Wrappers/VerifyUser';
@@ -11,17 +11,20 @@ const VerifyUser = () => {
   const { verificationCode } = useParams()
   const { vCode, isLoading } = useSelector((store) => store.user);
 
-  useEffect(() => {
+  //useLayoutEffect
+  useLayoutEffect(() => {
     dispatch(verifyUser(verificationCode))
     setTimeout(() => {
       navigate('/');
-    }, 3000)
+    }, 8000)
   }, []);
 
 
   return (
     <Wrapper >
-      <p>Redirecting...</p>
+      <p>{
+        vCode === verificationCode ? "Account Activated" : "404"
+      }</p>
     </Wrapper>
   )
 }

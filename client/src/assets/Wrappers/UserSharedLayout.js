@@ -10,7 +10,8 @@ const Wrapper = styled.div`
     z-index: 1003;
     width: 300px;
     transition: var(--transition);
-    background-color: var(--grey-50);
+    background-color: #F6F8FC;
+    box-shadow: var(--shadow-2);
   }
   .side-menu-disabled{
     display: none;
@@ -23,7 +24,7 @@ const Wrapper = styled.div`
       display: flex;
       align-items: center;
       color: var(--grey-500);
-      padding: 2rem ;
+      padding: 1.3rem 2rem ;
       text-transform: capitalize;
       transition: var(--transition);
     }
@@ -32,6 +33,9 @@ const Wrapper = styled.div`
     } */
     .active {
       background-color: var(--grey-100);
+      transition: var(--transition);
+      color: var(--grey-900);
+      opacity: 0.8;
     }
   .user-header{
     height: 50px;
