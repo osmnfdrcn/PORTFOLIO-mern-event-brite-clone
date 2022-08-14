@@ -39,7 +39,7 @@ export const logoutUserThunk = async (url, thunkAPI) => {
 
 export const updateUserThunk = async (url, user, thunkAPI) => {
   try {
-    const resp = await customFetch.patch(url, user)
+    const resp = await customFetch.post(url, user)
     return resp.data
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data.msg)

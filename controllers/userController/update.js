@@ -4,7 +4,6 @@ const BadRequestError = require('../../errors/bad-request.js')
 
 const update = async (req, res) => {
   const { password } = req.body
-
   // avatar cloudinary
   const updates = Object.keys(req.body)
   const allowedUpdates = password
@@ -21,8 +20,9 @@ const update = async (req, res) => {
   const user = req.user
   const token = req.token
 
-  res.status(StatusCodes.OK).json({ user, token })
-
+  password
+    ? res.status(StatusCodes.OK).json({ user, token, passwordChanged: true })
+    : res.status(StatusCodes.OK).json({ user, token })
 }
 
 module.exports = update

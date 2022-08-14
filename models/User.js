@@ -33,15 +33,19 @@ const UserSchema = new mongoose.Schema({
   address: {
     neighborhood: {
       type: String,
+      default: ""
     },
     city: {
       type: String,
+      default: ""
     },
     country: {
       type: String,
+      default: ""
     },
     zip: {
       type: String,
+      default: ""
     },
   },
   avatar: {

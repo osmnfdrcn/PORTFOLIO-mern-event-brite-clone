@@ -23,8 +23,12 @@ const UserSharedLayout = () => {
         <span>Menu</span>
       </div>
 
-      <NavLinks toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
-      <Outlet />
+      <div className='page-container'>
+        <NavLinks toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
+        <div className='outlet-area'>
+          <Outlet />
+        </div>
+      </div>
 
     </Wrapper>
   );

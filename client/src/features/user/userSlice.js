@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
+import axios from 'axios'
 import {
   addUserToLocalStorage,
   getUserFromLocalStorage,
@@ -42,7 +43,7 @@ export const loginUser = createAsyncThunk(
 )
 
 export const logoutUser = createAsyncThunk(
-  '/users/logout',
+  '/user/logout',
   async (user, thunkAPI) => {
     return logoutUserThunk('/users/logout', thunkAPI)
   }
@@ -132,14 +133,25 @@ const userSlice = createSlice({
       state.isLoading = true
     },
     [updateUser.fulfilled]: (state, { payload }) => {
-      const { user } = payload
+      const { user, passwordChanged } = payload
       const { token } = payload
       state.isLoading = false
-      state.user = user
-      state.token = token
-      addUserToLocalStorage(user, token)
+      if (passwordChanged) {
+        state.user = null
+        state.token = null
+        removeUserFromLocalStorage()
+        axios.get('http://localhost:5000/api/v1/users/auth/logout', { withCredentials: true })
+        toast.success(`Password Updated, Login again`)
+      } else {
+        state.user = user
+        state.token = token
+        addUserToLocalStorage(user, token)
+        toast.success(`User Updated!`)
+      }
 
-      toast.success(`User Updated!`)
+
+
+
     },
     [updateUser.rejected]: (state, { payload }) => {
       state.isLoading = false

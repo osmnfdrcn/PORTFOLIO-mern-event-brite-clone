@@ -257,6 +257,7 @@ ul {
   border-radius: var(--borderRadius);
   background: var(--backgroundColor);
   border: 1px solid var(--grey-200);
+  color: var(--grey-600);
 }
 
 .form-input,
@@ -310,62 +311,32 @@ ul {
   margin: 0 auto;
 }
 
-/* title */
-
-.title {
-  text-align: center;
-}
-
-.title-underline {
-  background: var(--primary-500);
-  width: 7rem;
-  height: 0.25rem;
-  margin: 0 auto;
-  margin-top: -1rem;
-}
-
-.container,
-.dashboard-section {
+.container{
   width: var(--fluid-width);
   max-width: var(--max-width);
-  margin: 60px auto;
+  margin: 100px auto;
 }
 
 
 .dashboard-section {
-  background-color: red;
-  padding: 30px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
 }
 
 .full-page {
   min-height: 100vh;
 }
 
-.coffee-info {
-  text-align: center;
-  text-transform: capitalize;
-  margin-bottom: 1rem;
-  letter-spacing: var(--letterSpacing);
-}
 
-.coffee-info span {
-  display: block;
-}
-
-.coffee-info a {
-  color: var(--primary-500);
-}
-
-@media screen and (min-width: 992px) {
-  .coffee-info {
-    text-align: left;
+@media screen and (min-width: 960px) {
+  .dashboard-section{
+    align-items: flex-start;
   }
-
-  .coffee-info span {
-    display: inline-block;
-    margin-right: 0.5rem;
+  .dashboard-container{
+    margin-left: 15vw;
   }
 }

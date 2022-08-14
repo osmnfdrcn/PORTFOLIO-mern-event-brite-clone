@@ -24,7 +24,7 @@ const SubMenu = () => {
         <li>Manage My Events</li>
         <li>Create An Event</li>
         <li>Following</li>
-        <li>Account Settings</li>
+        <Link to='/me'>Account Settings</Link>
         <li onClick={handleLogout}>Logout</li>
       </ul>
     </Wrapper>
