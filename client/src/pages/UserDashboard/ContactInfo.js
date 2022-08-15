@@ -1,5 +1,6 @@
 import { ImageUpload, UserInfo } from "../../components/UserProfile/"
 import { Title } from "../../components"
+
 const ContactInfo = () => {
   return (
     <div className='dashboard-section'>

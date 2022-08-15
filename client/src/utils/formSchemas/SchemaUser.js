@@ -14,4 +14,4 @@ const SchemaUser = Yup.object().shape({
 })
 
 
-export { SchemaUser }
+export default SchemaUser 

@@ -7,4 +7,6 @@ const logout = require('./logOut.js')
 const update = require('./update.js')
 const follow = require('./follow.js')
 const unfollow = require('./unfollow.js')
-module.exports = { register, login, verify, me, getUserProfile, logout, update, follow, unfollow }
+const avatarUpload = require('./avatarUpload.js')
+
+module.exports = { register, login, verify, me, getUserProfile, logout, update, follow, unfollow, avatarUpload }

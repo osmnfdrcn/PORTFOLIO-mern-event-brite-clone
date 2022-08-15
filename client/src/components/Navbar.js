@@ -1,12 +1,9 @@
-import Wrapper from '../assets/Wrappers/Navbar';
-import MainHeaderItem from './MainHeaderItem';
-import Logo from './Logo';
-import SubMenu from './SubMenu';
-import { AiOutlinePlus, AiOutlineHeart, AiOutlineUser, AiOutlineSearch } from 'react-icons/ai'
-
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setShowMainSubMenu } from '../features/app/appSlice'
+import Wrapper from '../assets/Wrappers/Navbar';
+import { MainHeaderItem, Logo, SubMenu } from './';
+import { AiOutlinePlus, AiOutlineHeart, AiOutlineUser, AiOutlineSearch } from 'react-icons/ai'
 
 
 const Navbar = () => {
@@ -23,7 +20,16 @@ const Navbar = () => {
           <MainHeaderItem reactIcon={<AiOutlineSearch />} text={"Search events"} classname={"header-item search"} />
           <MainHeaderItem reactIcon={<AiOutlinePlus />} text={"Create an event"} classname={"header-item"} />
           <MainHeaderItem reactIcon={<AiOutlineHeart />} text={"Likes"} classname={"header-item"} />
-          <MainHeaderItem reactIcon={<AiOutlineUser />} text={user.firstName} classname={"user-item"} onClick={() => dispatch(setShowMainSubMenu(!showMainSubMenu))} />
+          <MainHeaderItem
+            reactIcon={<AiOutlineUser />}
+            text={user.firstName}
+            classname={"user-item"}
+            onClick={(e) => {
+              e.stopPropagation()
+              dispatch(setShowMainSubMenu(!showMainSubMenu))
+            }
+            }
+          />
         </div>
         : (<div className='header-items'>
           <MainHeaderItem reactIcon={<AiOutlineSearch />} text={"Search events"} classname={"header-item search"} />

@@ -1,5 +1,5 @@
 import Wrapper from "../assets/Wrappers/LoginPage"
-import Login from "../components/Login"
+import { Login } from "../components"
 
 const LoginPage = () => {
   return (

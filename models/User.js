@@ -51,9 +51,11 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     public_id: {
       type: String,
+      default: "0"
     },
     url: {
       type: String,
+      default: "https://res.cloudinary.com/taracat/image/upload/v1660517430/mern_sample/Unknown_person_u0k0v6.jpg"
     },
   },
   status: {

@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
-import FormRow from "./FormRow";
-import Wrapper from "../assets/Wrappers/Login";
-import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, registerUser } from '../features/user/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from "formik";
-import * as Yup from 'yup'
 import { FcGoogle } from 'react-icons/fc'
-import axios from "axios";
+import { FormRow } from "./";
+import Wrapper from "../assets/Wrappers/Login";
+import { SchemaRegister, SchemaLogin } from "../utils/formSchemas";
 
 const Login = () => {
   const [isMember, setIsMember] = useState(true)
@@ -25,30 +23,6 @@ const Login = () => {
       "_self"
     );
   };
-
-  const SchemaRegister = Yup.object().shape({
-    firstName: Yup.string().required('required').min(2).max(30),
-    lastName: Yup.string().required('required').min(2).max(30),
-    email: Yup.string().required('required').matches(
-      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-      "please enter a valid email"
-    ),
-    password: Yup.string().required("required").matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
-    ),
-    confirmPassword: Yup.string().when("password", {
-      is: val => (val && val.length > 0 ? true : false),
-      then: Yup.string().oneOf(
-        [Yup.ref("password")],
-        "both password need to be the same"
-      )
-    })
-  })
-  const SchemaLogin = Yup.object().shape({
-    email: Yup.string().required('required'),
-    password: Yup.string().required("required"),
-  })
 
   const formik = useFormik({
     initialValues: {
@@ -151,19 +125,28 @@ const Login = () => {
             </>
           )}
 
-          <button className="btn btn-block" type="submit" >SUBMIT</button>
-          <p>
-            {isMember ? "Not a member yet?" : "Already a member?"}
-            <button
-              type="button"
-              onClick={() => {
-                formik.resetForm()
-                setIsMember(!isMember)
-              }}
-              className="btn-transparent">
-              {isMember ? "Register" : "Login"}
-            </button>
-          </p>
+          <button className="btn btn-block" type="submit" disabled={isLoading}>SUBMIT</button>
+
+          <div className="toggle-button">
+            <input type="checkbox" id="toggle" className="toggleCheckbox" />
+            <label htmlFor="toggle" className="toggleContainer">
+              <div
+                onClick={() => {
+                  formik.resetForm()
+                  setIsMember(!isMember)
+                }}>
+                Login
+              </div>
+
+              <div
+                onClick={() => {
+                  formik.resetForm()
+                  setIsMember(!isMember)
+                }}>
+                Register
+              </div>
+            </label>
+          </div>
 
         </form>
         <div className="social-login" onClick={googleAuth}>

@@ -1,6 +1,5 @@
 import Wrapper from "../assets/Wrappers/Title"
 
-
 const Title = ({ title }) => {
   return (
     <Wrapper>

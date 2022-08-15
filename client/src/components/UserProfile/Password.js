@@ -1,16 +1,17 @@
-import FormRow from "../FormRow";
+import { FormRow } from "../"
 import Wrapper from "../../assets/Wrappers/UserInfo";
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../../features/user/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from "formik";
-import { SchemaPasswordChange } from "../../utils/formSchemas/SchemaPasswordChange";
+import { SchemaPasswordChange } from "../../utils/formSchemas";
 
 
 const Password = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, isLoading } = useSelector((store) => store.user);
+  const userVerified = user.status === 'Active'
 
   const formik = useFormik({
     initialValues: {
@@ -52,7 +53,7 @@ const Password = () => {
           <span className="form-error">{formik.errors.confirmPassword} </span>
         }
 
-        <button className="btn btn-block" type="submit" >SUBMIT</button>
+        <button className="btn btn-block" type="submit" disabled={!userVerified} >SUBMIT</button>
 
 
       </form>

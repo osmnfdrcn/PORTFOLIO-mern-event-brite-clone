@@ -12,7 +12,6 @@ const FormRow = ({ type, name, value, onChange, onBlur, labelText }) => {
         onBlur={onBlur}
         className='form-input'
       />
-
     </div>
   )
 }

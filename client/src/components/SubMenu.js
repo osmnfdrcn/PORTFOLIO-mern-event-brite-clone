@@ -1,8 +1,9 @@
-import Wrapper from "../assets/Wrappers/SubMenu"
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from "../features/user/userSlice";
 import axios from 'axios'
+import Wrapper from "../assets/Wrappers/SubMenu"
+
 
 const SubMenu = () => {
   const dispatch = useDispatch();

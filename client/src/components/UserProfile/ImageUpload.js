@@ -1,7 +1,15 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import customFetch from '../../utils/axios'
+
 import Wrapper from '../../assets/Wrappers/ImageUpload';
+import { updateProfilePhoto } from '../../features/user/userSlice';
 
 const ImageUpload = () => {
+  const dispatch = useDispatch();
+  const { user, } = useSelector((store) => store.user);
+  const userVerified = user.status === 'Active'
+
   const [fileInputState, setFileInputState] = useState('');
   const [previewSource, setPreviewSource] = useState('');
   const [selectedFile, setSelectedFile] = useState();
@@ -27,18 +35,10 @@ const ImageUpload = () => {
     };
   };
 
-  const uploadImage = async (base64EncodedImage) => {
-    try {
-      await fetch('/api/upload', {
-        method: 'POST',
-        body: JSON.stringify({ data: base64EncodedImage }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-      setFileInputState('');
-      setPreviewSource('');
-    } catch (err) {
-      console.error(err);
-    }
+  const uploadImage = (base64EncodedImage) => {
+    dispatch(updateProfilePhoto({ data: base64EncodedImage }));
+    setFileInputState('');
+    setPreviewSource('');
   };
 
   const previewFile = (file) => {
@@ -61,7 +61,7 @@ const ImageUpload = () => {
               alt="chosen"
             // style={{ height: '200px' }}
             />)
-          : <img src={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE50XUNVmCwLBsiboW_ezv-O6FK2KRmh38SQ&usqp=CAU`} alt="avatar" />}
+          : <img src={user?.avatar?.url} alt="avatar" />}
       </div>
       <form onSubmit={handleSubmitFile} className="upload-form">
         <input
@@ -72,9 +72,10 @@ const ImageUpload = () => {
           onChange={handleFileInputChange}
           value={fileInputState}
           className="inputfile"
+          disabled={!userVerified}
         />
-        <label htmlFor="fileInput">Choose a file</label>
-        <button className="btn" type="submit" disabled={!selectedFile || selectedFile?.size > 1000000}>
+        <label htmlFor="fileInput" >Choose a file</label>
+        <button className="btn" type="submit" disabled={!userVerified || !selectedFile || selectedFile?.size > 1000000}>
           Save
         </button>
       </form>

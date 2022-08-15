@@ -16,15 +16,20 @@ const Wrapper = styled.div`
   }
 
   .image-container{
-    width: 300px;
-    max-height: 300px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .image-container img{
     display: block;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
-    width: 100%;
+     width: 300px;
     height: 300px;
+    border-radius: 50%;
+    
+
   }
  .upload-form{
   width: 100%;

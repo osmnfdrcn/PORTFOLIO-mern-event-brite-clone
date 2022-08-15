@@ -1,7 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Navbar } from '../components';
+import { Navbar, Warning } from '../components';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from 'react-redux';
+
+
 import {
   ContactInfo,
   Followers,
@@ -22,6 +25,9 @@ import {
 } from '../pages';
 
 const AppRoutes = () => {
+  const { user, } = useSelector((store) => store.user);
+  const userVerified = user?.status === 'Active'
+
   return (
     <Router>
       <Navbar />
@@ -32,8 +38,6 @@ const AppRoutes = () => {
         <Route path='/events' element={<EventsPage />} />
         <Route path='/events/:id' element={<SingleEventPage />} />
         <Route path='/users/verify/:verificationCode' element={<VerifyUser />} />
-
-
 
         <Route
           path='/me'
@@ -49,11 +53,12 @@ const AppRoutes = () => {
           <Route path='followings' element={<Followings />} />
         </Route>
 
-
-
         <Route path='*' element={<  HomePage />} />
       </Routes>
-      <ToastContainer autoClose={3000} position='top-left' theme="colored" />
+      {
+        user && !userVerified && <Warning text={"You should activete your account in order to use app unlimited!"} />
+      }
+      <ToastContainer autoClose={3000} position='top-left' theme="colored" pauseOnFocusLoss={false} closeOnClick pauseOnHover={false} />
     </Router>
   )
 }

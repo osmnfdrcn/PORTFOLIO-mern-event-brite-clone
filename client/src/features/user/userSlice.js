@@ -14,6 +14,7 @@ import {
   registerUserThunk,
   updateUserThunk,
   verifyUserThunk,
+  updateProfilePhotoThunk
 } from './userThunk'
 
 const initialState = {
@@ -29,12 +30,14 @@ export const registerUser = createAsyncThunk(
     return registerUserThunk('/users/register', user, thunkAPI)
   }
 )
+
 export const verifyUser = createAsyncThunk(
   'user/verifyUser',
   async (verificationCode, thunkAPI) => {
     return verifyUserThunk('/users/verify', verificationCode, thunkAPI)
   }
 )
+
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (user, thunkAPI) => {
@@ -53,6 +56,13 @@ export const updateUser = createAsyncThunk(
   'user/updateUser',
   async (user, thunkAPI) => {
     return updateUserThunk('/users/me', user, thunkAPI)
+  }
+)
+
+export const updateProfilePhoto = createAsyncThunk(
+  'user/updateProfilePhoto',
+  async (data, thunkAPI) => {
+    return updateProfilePhotoThunk('/users/me/upload', data, thunkAPI)
   }
 )
 
@@ -129,6 +139,7 @@ const userSlice = createSlice({
     [logoutUser.rejected]: (state) => {
       state.isLoading = false
     },
+
     [updateUser.pending]: (state) => {
       state.isLoading = true
     },
@@ -148,12 +159,24 @@ const userSlice = createSlice({
         addUserToLocalStorage(user, token)
         toast.success(`User Updated!`)
       }
-
-
-
-
     },
     [updateUser.rejected]: (state, { payload }) => {
+      state.isLoading = false
+      toast.error(payload)
+    },
+
+    [updateProfilePhoto.pending]: (state) => {
+      state.isLoading = true
+    },
+    [updateProfilePhoto.fulfilled]: (state, { payload }) => {
+      const { user, token } = payload
+      state.user = user
+      state.token = token
+      state.isLoading = false
+      addUserToLocalStorage(user, token)
+      toast.success(`Profile Photo Updated...`)
+    },
+    [updateProfilePhoto.rejected]: (state, { payload }) => {
       state.isLoading = false
       toast.error(payload)
     },
@@ -162,3 +185,4 @@ const userSlice = createSlice({
 
 export const { socialLogin } = userSlice.actions
 export default userSlice.reducer
+

@@ -1,10 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import { userProfileMenuLinks as links } from '../utils/links'
+import { useSelector } from 'react-redux';
 
-const NavLinks = ({ toggleMenu, setToggleMenu }) => {
+const NavLinks = () => {
+  const { showUserProfileMobileMenu } = useSelector((store) => store.app)
+
   return (
     <nav className='side-menu'
-      style={toggleMenu ? { "display": "block" } : null}
+      style={showUserProfileMobileMenu ? { "display": "block" } : null}
     >
       <div className='nav-links'>
         {

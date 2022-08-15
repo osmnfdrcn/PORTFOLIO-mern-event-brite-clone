@@ -1,5 +1,5 @@
 import { Title } from "../../components"
-import Password from "../../components/UserProfile/Password"
+import { Password } from "../../components/UserProfile/"
 
 const PasswordChange = () => {
   return (
