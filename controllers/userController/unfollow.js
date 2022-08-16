@@ -6,12 +6,11 @@ const unfollow = async (req, res) => {
   const { _id } = req.body
   const user = await User.findById(_id)
   if (!user) { throw new BadRequestError('No User') }
-  if (user.status === 'Pending') { throw new BadRequestError('User is not active') }
+  if (req.user.status === 'Pending') { throw new BadRequestError('You should activate your account first.') }
 
-  const isFollowing = await User.findOne({
-    "followers.user": req.user._id,
-  })
-  if (!isFollowing) { throw new BadRequestError('You are already not following the user') }
+
+  const isFollowing = req.user.followings.filter((f) => f.user.toString() === user._id.toString())
+  if (!isFollowing.length) { throw new BadRequestError('You are already not following the user') }
 
   req.user.followings = req.user.followings.filter(f => f.user.toString() != user._id.toString())
   await req.user.save()

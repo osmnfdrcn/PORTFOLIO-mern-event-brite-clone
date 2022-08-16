@@ -81,14 +81,6 @@ const UserSchema = new mongoose.Schema({
       user: {
         type: mongoose.Schema.ObjectId,
         required: true,
-      },
-      firstName: {
-        type: String,
-        required: true
-      },
-      lastName: {
-        type: String,
-        required: true
       }
     },
   ],
@@ -97,16 +89,8 @@ const UserSchema = new mongoose.Schema({
       user: {
         type: mongoose.Schema.ObjectId,
         required: true,
-      },
-      firstName: {
-        type: String,
-        required: true
-      },
-      lastName: {
-        type: String,
-        required: true
       }
-    },
+    }
   ],
   googleId: {
     type: String

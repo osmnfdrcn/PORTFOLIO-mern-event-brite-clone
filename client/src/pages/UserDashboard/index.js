@@ -1,12 +1,12 @@
 import ContactInfo from "./ContactInfo";
-import Followers from "./Followers";
+import FollowersPage from "./FollowersPage";
 import Followings from "./Followings";
 import PasswordChange from "./PasswordChange";
 import UserSharedLayout from "./UserSharedLayout";
 
 export {
   ContactInfo,
-  Followers,
+  FollowersPage,
   Followings,
   PasswordChange,
   UserSharedLayout

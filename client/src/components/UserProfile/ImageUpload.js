@@ -16,7 +16,7 @@ const ImageUpload = () => {
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
-    if (file.size > 500000) { return }
+    if (file.size > 2000000) { return }
     previewFile(file);
     setSelectedFile(file);
     setFileInputState(e.target.value);

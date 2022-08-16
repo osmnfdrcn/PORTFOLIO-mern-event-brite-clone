@@ -14,14 +14,21 @@ import {
   registerUserThunk,
   updateUserThunk,
   verifyUserThunk,
-  updateProfilePhotoThunk
+  updateProfilePhotoThunk,
+  getUsersThunk
 } from './userThunk'
 
 const initialState = {
   isLoading: false,
   user: getUserFromLocalStorage(),
   token: getTokenFromLocalStorage(),
-  vCode: ''
+  vCode: '',
+  users: [],
+  singleUser: {},
+  totalUsers: 0,
+  numOfPages: 0,
+  page: 1,
+  skip: 0,
 }
 
 export const registerUser = createAsyncThunk(
@@ -66,6 +73,13 @@ export const updateProfilePhoto = createAsyncThunk(
   }
 )
 
+export const getUsers = createAsyncThunk(
+  'user/getUsers',
+  async (url, thunkAPI) => {
+    return getUsersThunk(`/users${url}`, thunkAPI)
+  }
+)
+
 
 const userSlice = createSlice({
   name: 'user',
@@ -74,7 +88,15 @@ const userSlice = createSlice({
     socialLogin: (state, { payload }) => {
       state.user = payload
       addUserToLocalStorage(payload, payload.verification.code)
+    },
+    clearSearchCriterias: (state, { payload }) => {
+      state.users = []
+      state.totalUsers = 0
+      state.numOfPages = 0
+      state.page = 1
+      state.skip = 0
     }
+
   },
   extraReducers: {
     [registerUser.pending]: (state) => {
@@ -180,9 +202,25 @@ const userSlice = createSlice({
       state.isLoading = false
       toast.error(payload)
     },
+
+    [getUsers.pending]: (state) => {
+      state.isLoading = true
+    },
+    [getUsers.fulfilled]: (state, { payload }) => {
+      const { users, totalUsers, numOfPages } = payload
+      console.log(payload);
+      state.users = users
+      state.totalUsers = totalUsers
+      state.numOfPages = numOfPages
+      state.isLoading = false
+    },
+    [getUsers.rejected]: (state, { payload }) => {
+      state.isLoading = false
+      toast.error(payload)
+    },
   },
 })
 
-export const { socialLogin } = userSlice.actions
+export const { socialLogin, clearSearchCriterias } = userSlice.actions
 export default userSlice.reducer
 

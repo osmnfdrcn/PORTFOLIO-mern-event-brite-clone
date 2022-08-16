@@ -5,25 +5,19 @@ const BadRequestError = require('../../errors/bad-request.js')
 const follow = async (req, res) => {
   const { _id } = req.body
   const user = await User.findById(_id)
+
+  if (req.user.status === 'Pending') { throw new BadRequestError('You should activate your account first.') }
+  if (req.user._id.toString() === _id) { throw new BadRequestError('You cannot follow yourself.') }
   if (!user) { throw new BadRequestError('No User') }
-  if (user.status === 'Pending') { throw new BadRequestError('User is not active') }
-
-  const isFollowing = await User.findOne({
-    "followers.user": req.user._id,
-  })
-  if (isFollowing) { throw new BadRequestError('You are already following the user') }
-
+  const isFollowing = req.user.followings.filter((f) => f.user.toString() === user._id.toString())
+  if (isFollowing.length) { throw new BadRequestError('You are already following the user') }
   req.user.followings.push({
     user: user._id,
-    firstName: user.firstName,
-    lastName: user.lastName
   })
   await req.user.save()
 
   user.followers.push({
     user: req.user._id,
-    firstName: req.user.firstName,
-    lastName: req.user.lastName
   })
 
   await user.save()

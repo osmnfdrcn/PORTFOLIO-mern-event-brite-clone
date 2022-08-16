@@ -34,7 +34,6 @@ const Login = () => {
     },
     validationSchema: isMember ? SchemaLogin : SchemaRegister,
     onSubmit: () => {
-      console.log(formik.values)
       const { firstName, lastName, email, password } = formik.values;
 
       if (isMember) {
