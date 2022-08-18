@@ -9,6 +9,7 @@ import NavLinks from "./NavLinks";
 import SubMenu from "./SubMenu";
 import Pagination from './Pagination'
 import User from './User'
+import Spinner from './Spinner'
 
 
 export {
@@ -23,4 +24,5 @@ export {
   SubMenu,
   User,
   Pagination,
+  Spinner,
 }

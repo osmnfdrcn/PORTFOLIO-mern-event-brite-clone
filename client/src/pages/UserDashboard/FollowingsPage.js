@@ -4,12 +4,12 @@ import { clearSearchCriterias, getUsers } from '../../features/user/userSlice'
 import { Title, User, Pagination, Spinner } from "../../components"
 import Wrapper from '../../assets/Wrappers/Followers';
 
-const FollowersPage = () => {
+const FollowingsPage = () => {
   const dispatch = useDispatch();
   const { users, isLoading, totalUsers, numOfUsers, numOfPages, skip, limit, page } = useSelector((store) => store.user);
 
   useEffect(() => {
-    dispatch(getUsers(`?limit=${+limit}&skip=${skip}&criteria=followers`));
+    dispatch(getUsers(`?limit=${+limit}&skip=${skip}&criteria=followings`));
   }, [page])
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const FollowersPage = () => {
   }
   return (
     <div className='dashboard-section'>
-      <Title title={'Followers'} />
+      <Title title={'Followings'} />
       <Wrapper>
         {users.map(user => {
           return (
@@ -38,4 +38,4 @@ const FollowersPage = () => {
   )
 }
 
-export default FollowersPage
+export default FollowingsPage

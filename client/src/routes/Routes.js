@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import {
   ContactInfo,
   FollowersPage,
-  Followings,
+  FollowingsPage,
   PasswordChange,
   UserSharedLayout
 } from '../pages/UserDashboard'
@@ -50,7 +50,7 @@ const AppRoutes = () => {
           <Route index element={<ContactInfo />} />
           <Route path='password' element={<PasswordChange />} />
           <Route path='followers' element={<FollowersPage />} />
-          <Route path='followings' element={<Followings />} />
+          <Route path='followings' element={<FollowingsPage />} />
         </Route>
 
         <Route path='*' element={<  HomePage />} />

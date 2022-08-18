@@ -29,7 +29,7 @@ const initialState = {
   numOfPages: 0,
   page: 1,
   skip: 0,
-  limit: 5
+  limit: 8
 }
 
 export const registerUser = createAsyncThunk(
@@ -219,7 +219,7 @@ const userSlice = createSlice({
       state.users = users
       state.totalUsers = totalUsers
       state.numOfPages = numOfPages
-      state.skip = skip
+      state.skip = Number(skip)
       state.isLoading = false
     },
     [getUsers.rejected]: (state, { payload }) => {

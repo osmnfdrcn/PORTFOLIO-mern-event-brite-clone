@@ -4,7 +4,7 @@ const BadRequestError = require('../../errors/bad-request.js')
 
 const getUsers = async (req, res) => {
   const { criteria, limit, skip } = req.query
-  console.log(skip);
+  console.log(criteria, "---", limit, "---", skip);
   let allUsers = []
   let users = []
   let totalUsers = 0
@@ -30,6 +30,7 @@ const getUsers = async (req, res) => {
       address: 0
     }).limit(limit).skip(skip)
 
+
   }
   if (criteria === 'followers') {
     allUsers = await User.find({
@@ -52,6 +53,7 @@ const getUsers = async (req, res) => {
     }).limit(limit).skip(skip)
 
   }
+
   totalUsers = allUsers.length
   numOfPages = Math.ceil(totalUsers / limit)
 
