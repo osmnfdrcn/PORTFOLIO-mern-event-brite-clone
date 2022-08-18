@@ -7,6 +7,8 @@ import Logo from "./Logo";
 import MainHeaderItem from "./MainHeaderItem";
 import NavLinks from "./NavLinks";
 import SubMenu from "./SubMenu";
+import Pagination from './Pagination'
+import User from './User'
 
 
 export {
@@ -19,4 +21,6 @@ export {
   MainHeaderItem,
   NavLinks,
   SubMenu,
+  User,
+  Pagination,
 }

@@ -29,6 +29,7 @@ const initialState = {
   numOfPages: 0,
   page: 1,
   skip: 0,
+  limit: 5
 }
 
 export const registerUser = createAsyncThunk(
@@ -95,9 +96,15 @@ const userSlice = createSlice({
       state.numOfPages = 0
       state.page = 1
       state.skip = 0
-    }
-
+    },
+    updateSkip: (state, { payload }) => {
+      state.skip = Number(state.skip) + payload
+    },
+    updatePage: (state, { payload }) => {
+      state.page = payload
+    },
   },
+
   extraReducers: {
     [registerUser.pending]: (state) => {
       state.isLoading = true
@@ -207,11 +214,12 @@ const userSlice = createSlice({
       state.isLoading = true
     },
     [getUsers.fulfilled]: (state, { payload }) => {
-      const { users, totalUsers, numOfPages } = payload
+      const { users, totalUsers, numOfPages, skip } = payload
       console.log(payload);
       state.users = users
       state.totalUsers = totalUsers
       state.numOfPages = numOfPages
+      state.skip = skip
       state.isLoading = false
     },
     [getUsers.rejected]: (state, { payload }) => {
@@ -221,6 +229,6 @@ const userSlice = createSlice({
   },
 })
 
-export const { socialLogin, clearSearchCriterias } = userSlice.actions
+export const { socialLogin, clearSearchCriterias, updateSkip, updatePage } = userSlice.actions
 export default userSlice.reducer
 

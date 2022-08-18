@@ -1,19 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { clearSearchCriterias, getUsers } from '../../features/user/userSlice'
-import { Title } from "../../components"
+import { Title, User, Pagination } from "../../components"
 import Wrapper from '../../assets/Wrappers/Followers';
-import User from '../../components/User';
 
 const FollowersPage = () => {
   const dispatch = useDispatch();
-  const { users, isLoading, totalUsers, numOfUsers } = useSelector((store) => store.user);
+  const { users, isLoading, totalUsers, numOfUsers, numOfPages, skip, limit } = useSelector((store) => store.user);
 
   useEffect(() => {
-    dispatch(getUsers('?limit=10&skip=0&criteria=followers'));
+    dispatch(getUsers(`?limit=${+limit}&skip=${skip}&criteria=followers`));
+
+  }, [skip])
+
+  useEffect(() => {
     return () => {
       dispatch(clearSearchCriterias())
     }
+
   }, [])
 
   if (isLoading) {
@@ -28,7 +32,9 @@ const FollowersPage = () => {
             <User user={user} />
           )
         })}
+
       </Wrapper>
+      <Pagination />
     </div>
   )
 }

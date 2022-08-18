@@ -4,7 +4,7 @@ const BadRequestError = require('../../errors/bad-request.js')
 
 const getUsers = async (req, res) => {
   const { criteria, limit, skip } = req.query
-
+  console.log(skip);
   let allUsers = []
   let users = []
   let totalUsers = 0
@@ -55,7 +55,7 @@ const getUsers = async (req, res) => {
   totalUsers = allUsers.length
   numOfPages = Math.ceil(totalUsers / limit)
 
-  res.status(StatusCodes.OK).json({ users, totalUsers, numOfPages })
+  res.status(StatusCodes.OK).json({ users, totalUsers, numOfPages, skip })
 
 }
 

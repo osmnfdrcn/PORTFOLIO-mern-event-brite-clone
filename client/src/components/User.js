@@ -7,12 +7,10 @@ const User = ({ user }) => {
     // <Link to={`/user/${id}`} >
     <Wrapper>
       <div className="user">
-        <div className="user-avatar">
+        <div className="avatar-container">
           <img src={avatar?.url} alt="avatar" />
         </div>
-        <div className="user-info">
-          <span>{firstName}   </span>
-        </div>
+        <span>{firstName}   </span>
       </div>
 
     </Wrapper>
